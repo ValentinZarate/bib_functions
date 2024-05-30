@@ -35,11 +35,35 @@ The function constructs a keyword pattern from the keywords vector and filters t
 Purpose: This function processes BibTeX files to filter entries based on a list of keyword vectors, applying multiple sequences of keywords.
 
 #### Arguments:
-_keywords_list_: A list of keyword vectors. Each vector represents a sequence of words connected by an OR boolean operator, and the list represents sequences connected by an AND boolean operator.
+_keywords_list_: A list of keyword vectors. Each vector represents a sequence of words connected by an OR boolean operator, and the list represents a group of sequences (each vector) connected by an AND boolean operator.
 
 #### Details:
-The function all_bib_to_df processes BibTeX files to filter entries based on a list of keywords. The function operates in two main steps:
-Keyword List Format: The keyword list should be a list of word vectors. Each vector represents a sequence of words connected by an OR boolean operator (represented by commas within the vector). The combination of these vectors in the list is connected by an AND boolean operator. This means the function will filter all BibTeX files within the same directory as the script, including an entry if at least one word from each vector is present in either the 'abstract' or 'title'. Entries not meeting this criterion are excluded.
+The function all_bib_to_df processes BibTeX files to filter entries based on a list of keywords. It will apply the keyword list to all BibTeX in the working directory.
+Keyword List Format: The keyword list should be a list of word vectors. Each vector represents a sequence of words connected by an OR boolean operator (represented by commas within the vector). The union among each vector into the list will be assumed as an AND boolean operator. .
  
-_Function Implementation_: The function utilizes packages such as 'dplyr', 'stringr', and 'RefManageR'. It also uses an auxiliary function bib_to_filtered to handle the filtering process. The function reads all BibTeX files in the directory, applies the keyword filtering, and combines the results into a single filtered data frame. The filtering is performed iteratively to ensure each keyword vector's criteria are met.
+#### _Function Implementation_: 
+The function utilizes packages such as 'dplyr', 'stringr', and 'RefManageR'. It also uses a helper function _bib_to_filtered_ to handle the filtering process. The function reads all BibTeX files in the working directory, applies the keyword filtering, and combines the results into a single filtered data frame. The filtering is performed iteratively to ensure each keyword vector's criteria are met.
 The function reads all BibTeX files in the current directory and applies the bib_to_filtered function using the first set of keywords from keywords_list. It then iteratively filters the combined data frame using the remaining sets of keywords. The result is a combined and filtered data frame containing entries that match all keyword sequences.
+
+#### Detailed Explanation (_steps_):
+
+##### _Load Required Packages_:
+The function begins by loading the required packages: dplyr, stringr, and RefManageR.
+
+##### _Define Helper Function_:
+_bib_to_filtered_ is a helper function that reads and processes a single BibTeX file, filtering entries based on a given set of keywords.
+
+##### Converts BibTeX data to a data frame.
+Creates a keyword pattern for the OR condition.
+Filters entries where the 'title' or 'abstract' contains any of the keywords.
+##### Get BibTeX Files:
+The function lists all .bib files in the working directory.
+
+##### Initial Filtering:
+Applies the _bib_to_filtered_ function to each BibTeX file using the first set of keywords. Combines and deduplicates the filtered data frames.
+
+##### Iterate Over Keyword Vectors:
+For each remaining set of keywords, it further filters the combined data frame to include only entries that match the current set of keywords.
+
+##### Return Result:
+The final filtered data frame is returned.
