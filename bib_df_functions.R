@@ -1,5 +1,5 @@
 
-# primera función, se le debe ingresar un archivo formato 'bib' en el primer argumento que tenga al menos una columna con 'abstract' y otra 'title'. el segundo argumento tiene que ser un vector de palabras clave que se utilizarán para filtrar el dataframe. Estas palabras clave se buscarán en las columnas title y abstract.
+# For the first function, the first argument should be a 'bib' format file that contains at least one column with 'abstract' and another with 'title'. The second argument must be a vector of keywords that will be used to filter the data frame. These keywords will be searched in the 'title' and 'abstract' columns.
 
 bib_to_filtered <- function(bib_data, keywords) {
   
@@ -32,7 +32,7 @@ bib_to_filtered <- function(bib_data, keywords) {
 }
 
 
-# esta función utiliza la primera 'bib_to_filtered'. En este caso puede hacer una df utilizando todos los archivos 'bib' que esten en la misma carpeta que el script, es decir que tengan el mismo directorio. Además, eliminar las filas repetidas basandose en el doi.
+# This function uses the first function, 'bib_to_filtered'. In this case, it can create a data frame using all the 'bib' files that are in the same folder as the script, meaning they have the same directory. Additionally, it removes duplicate rows based on the DOI.
 
 process_bib_files <- function(keywords) {
   
@@ -49,7 +49,7 @@ process_bib_files <- function(keywords) {
 }
 
 
-# incorporando una data frame y una secuencia de keywords (vector de palabras). La idea es incoprporar la df resultante de las funciones anteriores. Es decir df <- process_bib_files(keywords) o df <- bib_to_filtered(bib_data, keywords)
+# Incorporating a data frame and a sequence of keywords (keyword vector). The idea is to incorporate the resulting data frame from the previous functions. For example, df <- process_bib_files(keywords) or df <- bib_to_filtered(bib_data, keywords).
 
 other_seq <- function(data, keywords) {
   
@@ -67,7 +67,7 @@ other_seq <- function(data, keywords) {
 }
 
 
-##### 1 in one step. There are two importants steps in the application of this function. 1) the keyword list should present the format of a list of word vectors, each vector represent a sequence of words connected by a OR boolean operator, but should be represented as ','. The union of each vection into the list is represented by an 'AND' boolean operator. That is, the function will filter all bib. files inside the same folder as the script. this filtering will based on the condition that 'abstract' or 'title' at least one word of each word vector, but if the article do not have at least one word of one vector it will be excluded. The output is a filtered dataframe. This functions used functions of 'dplyr' package, 'stringr' and RefManager', and also it uses an auxiliar functions 'bib_to_filtered'
+##### 1 in one step. There are two important steps in the application of this function. 1) the keyword list should present the format of a list of word vectors, each vector represents a sequence of words connected by an OR boolean operator, but should be represented as ','. The union of each vector into the list is represented by an 'AND' boolean operator. That is, the function will filter all bibs. files inside the same folder as the script. this filtering will based on the condition that 'abstract' or 'title' have at least one word of each word vector, but if the article does not have at least one word of one vector it will be excluded. The output is a filtered data frame. These functions used functions of 'dplyr' package, 'stringr' and RefManager', and also it uses an auxiliary functions 'bib_to_filtered'
 
 all_bib2df <- function(keywords_list) {
   
@@ -82,10 +82,9 @@ all_bib2df <- function(keywords_list) {
     bib_df <- as.data.frame(bib_data)
     rownames(bib_df) <- NULL
     
-    # Crear el patrón de palabras clave considerando OR
+    # Create the keyword pattern, as they were separated by 'OR'
     keyword_pattern <- paste(keywords, collapse = "|")
     
-    # Filtrar el DataFrame según el patrón de palabras clave
     filtered_df <- bib_df %>%
       mutate(keyword_detected = if_else(
         str_detect(title, keyword_pattern) |
@@ -102,13 +101,13 @@ all_bib2df <- function(keywords_list) {
   directory <- getwd()
   bib_files <- list.files(path = directory, pattern = "*.bib", full.names = TRUE)
   
-  # uso el coso lapply para aplicar la función bib_to_filtered a cada archivo .bib en bib_files, utilizando el primer conjunto de palabras clave de keywords_list
+  # I use the lapply function to apply the bib_to_filtered function to each .bib file in bib_files, using the first set of keywords from keywords_list
   
   filtered_dfs <- lapply(bib_files, bib_to_filtered, keywords_list[[1]])
   combined_df <- bind_rows(filtered_dfs) %>%
     distinct(doi, .keep_all = TRUE)
   
-  # el bucle 'for' (i in 2:length(keywords_list)) iterará sobre todos los vectores dentro de keywords_list empezando desde el segundo vector hasta el final de la lista. En este caso lo hace dos veces nomas, pero si tuviese muchos AND en mi secuencia de busqueda entonces lo haría todas esas veces.
+  # The 'for' loop (for (i in 2:length(keywords_list))) will iterate over all the vectors within keywords_list, starting from the second vector to the end of the list. In this case, it only does it twice, but if I had many ANDs in my search sequence, it would do it that many times.
   
   for (i in 2:length(keywords_list)) {
     keyword_pattern <- paste(keywords_list[[i]], collapse = "|")
@@ -125,7 +124,7 @@ all_bib2df <- function(keywords_list) {
   return(combined_df)
 }
 
-# A la funcion se le debe introducir una lista de 'keywords', cada elemento de la lista tiene que tener la secuencia de búsqueda con palabras clave que quieran ser separadas con OR. Cada secunecia sera filtrada por separado como si estuviesen separadas por AND (inclusion obligatoria). La funcion luego va a incluir todo el listado de archivos Bib que esten en la misma carpeta que el script. 
+# The function requires a list of 'keywords', each element of the list must contain a search sequence with keywords that are separated by OR. Each sequence will be filtered separately as if they were separated by AND (mandatory inclusion). The function will then include all Bib files that are in the same folder as the script. 
 
 keywords1 <- c("human", "humans", "fragmentation", "fragmented", "agricultural",
                "agriculture", "crop", "crops", "plantation", "plantations","human-dominated", "human-modified","forestry", "production", "commercial","harvested", "fragment", "fragments", "management", "land use", "athropogenic","logging", "managed", "anthropogenically", "mosaic", "rural", "agriculture", "agroecosystem", "timber", "agro-forestry")
@@ -134,7 +133,8 @@ keywords2 <- c("mammal", "mammals", "mammalian")
 
 keywords3 <- c("home range", "home ranges", "home-ranges", "home-range", "ranging behavior", "kernel", "fixed-kernel", "kernel-density")
 
-# Lista de secuencias de búsqueda
+# keyword sequence, each vector is separated by 'AND' boolean operators.
+
 keywords_list <- list(keywords1, keywords2, keywords3)
 
 result <- all_bib2df(keywords_list)
