@@ -6,7 +6,7 @@
 
 #### 1. **Create Seed Studies (SS<sub>i</sub>):**
    - Use traditional search engines like Scopus and Google Scholar.
-   - Employ search sequences with Boolean operators to compile an initial set of studies. This dataset will be called Seed Studies (SS<sub>1</sub>). Sub-index 'i' represents the 'i-th cycle of search'. For the first cycle of search, SS<sub>1</sub> will be created using the traditional search engines, but in the second cycle (i.e., i = 2), SS<sub>2</sub> will be created from overlapping FS<sub>1</sub> and SS<sub>1</sub>, and extracting unique studies only present in FS<sub>1</sub> (see [step 4](#4-remove-duplicates-and-create-new-seed-studies-sssubisub)). This will be repeated for all subsequent cycles of search.
+   - Employ search sequences with Boolean operators to compile an initial set of studies. This dataset will be called Seed Studies (SS<sub>i</sub>). Sub-index 'i' represents the 'i-th cycle of search'. For the first cycle of search, SS<sub>1</sub> will be created using the traditional search engines, but in the second cycle (i.e., i = 2), SS<sub>2</sub> will be created from overlapping FS<sub>1</sub> and SS<sub>1</sub>, and extracting unique studies only present in FS<sub>1</sub> (see [step 4](#4-remove-duplicates-and-create-new-seed-studies-sssubisub)). This will be repeated for all subsequent cycles of search.
 
 #### 2. **Expand Seed Studies (ES<sub>i</sub>):**
    - Import the SS<sub>i</sub> studies as BibTeX to [Research Rabbit](https://researchrabbitapp.com/home).
