@@ -4,37 +4,43 @@
 
 ### Here are the steps involved:
 
-#### 1. **Create Seed Studies (SS<sub>i</sub>):**
-   - Use traditional search engines like Scopus and Google Scholar.
-   - Employ search sequences with Boolean operators to compile an initial set of studies. This dataset will be called Seed Studies (SS<sub>i</sub>). Sub-index 'i' represents the 'i-th cycle of search'. For the first cycle of search, SS<sub>1</sub> will be created using the traditional search engines, but in the second cycle (i.e., i = 2), SS<sub>2</sub> will be created from overlapping FS<sub>1</sub> and SS<sub>1</sub>, and extracting unique studies only present in FS<sub>1</sub> (see [step 4](#4-remove-duplicates-and-create-new-seed-studies-sssubisub)). This will be repeated for all subsequent cycles of search.
+#### 1. **Create Seed Studies:**
+   - Use traditional search methods, using a keyword sequence (with boolean operators and truncation for example) and search engines like Scopus, Web of Science, and Google Scholar.
+   - This initial dataset will be called Seed Studies (SS<sub>0</sub>). These studies should be organized in Reference Manager Software like Zotero, Mendeley, or EndNote to provide the correct format (BibTeX) for the next steps.
+   - This initial set of seed studies will be loaded in the final dataset (FD), which will be used for the systematic analysis.
 
-#### 2. **Expand Seed Studies (ES<sub>i</sub>):**
-   - Import the SS<sub>i</sub> studies as BibTeX to [Research Rabbit](https://researchrabbitapp.com/home).
-   - For each SS<sub>i</sub>, Research Rabbit will retrieve all its references and citations and you need to export each group of references as BibTeX. We will end up with 2 BibTeX files per study inside the SS<sub>i</sub> dataset, one for references and one for citations of each study inside the SS<sub>i</sub> dataset. All BibTeX files should be saved in the same directory as the R script in which [`all_bib_to_df`](./'all_bib_to_df'%20function) will be run.
-   - This expansion produces a new, larger set of studies called Expanded Studies (ES<sub>i</sub>).
+#### 2. **Expand Seed Studies:**
+   - Import the SS<sub>0</sub> studies as BibTeX to [Research Rabbit](https://researchrabbitapp.com/home).
+   - For each SS<sub>0</sub>, Research Rabbit will retrieve all its references (studies cited by the seed study; previous studies) and citations (studies that cite each seed study; posterior studies), this dataset should be exported as BibTeX. For each seed study inside SS<sub>0</sub> we will have 2 BibTeX files: one for 'references' and one for 'citations'. All BibTeX files should be saved in the same directory (see why in step 3).
+   - This expansion produces a new, larger set of studies called Expanded Studies (ES).
 
-#### 3. **Filter Expanded Studies (FS<sub>i</sub>):**
-   - Use a search sequence (the same used to create SS<sub>1</sub>) to filter the ES<sub>1</sub> dataset using the [`all_bib_to_df`](./'all_bib_to_df'%20function).
-   - The function will remove all studies that aren't useful, including duplicates inside the large (ES<sub>i</sub>) dataset. This will result in a Filtered Studies (FS<sub>i</sub>) dataset.
+#### 3. **Filter Expanded Studies:**
+   - We will use the same keyword sequence of 'step 1' (to create SS<sub>0</sub>) to filter the ES dataset using the [`all_bib_to_df`](./'all_bib_to_df'%20function). This function requires that all BibTex files are in the same work directory where the R script will be run.
+   - The R function will remove all studies of ES that not satisfied the keyword sequence, using their 'keywords', 'title', and 'abstract'. ES probably includes a lot of duplicate studies, so [`all_bib_to_df`](./'all_bib_to_df'%20function) also removes those redundant studies. The result of this filtering will be a dataset called Filtered Studies (FS).
 
-#### 4. **Remove Duplicates and Create New Seed Studies (SS<sub>i+1</sub>):**
-   - Overlap the FS<sub>i</sub> dataset with a combined dataset of all unique studies from all previous Seed Studies SS<sub>1:i</sub> = (SS<sub>1</sub> ∪ SS<sub>2</sub> ∪ ... ∪ SS<sub>i</sub>). This combined dataset will be referred to as SS<sub>1:i</sub>.
-   - The goal is to create a New Seed Studies dataset (SS<sub>i+1</sub>) that only contains studies present in FS<sub>i</sub> but not in SS<sub>0:i</sub>.
-   - This can be done in R using the `anti_join` function of the `dplyr` package. Example:
-  
+#### 4. **Keep unique studies:**
+   - FS dataset will be overlapped with SS<sub>0</sub> to keep only the new studies provided by the expansion and filtering steps (2nd and 3rd steps). This new dataset of studies is composed by all studies present in FS but not in the initial dataset SS<sub>0</sub>.
+   - This new data set will be called New Seed Studies (NSS), and will be added to the final dataset DF, together with all studies included in SS<sub>0</sub>.
+
+#### 5. **Repeat the Cycle:**-
+   - The NSS will reinitiate the cycle, just like SS<sub>0</sub>. NSS<sub>1</sub>, sub-index '1' indicates the dataset created by one expanding-filtering cycle
+   - NSS<sub>1</sub> will be expanded with Research Rabbit creating an ES<sub>1</sub> dataset (step 2).
+   - ES<sub>1</sub> will be filtered with the [`all_bib_to_df`](./'all_bib_to_df'%20function) function creating an FS<sub>1</sub> dataset (step 3).
+   - FS<sub>1</sub> dataset will be overlapped with the union of SS<sub>0</sub> and NSS<sub>1</sub> to find all unique studies and create the new seed studies data set NSS<sub>2</sub>. NSS<sub>2</sub> will be added to the final dataset DF (together with SS <sub>2</sub> and NSS <sub>1</sub> studies) and reinitiate the cycle starting in step 2.
+   - This cycle will be repeated 'n' times until the NSS<sub>n</sub> is empty.
+
+Note: the 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycles) with the union of previous seed study datasets (NSS<sub>1:i</sub> = (SS<sub>0</sub> ∪ NSS<sub>1</sub> ∪ NSS<sub>2</sub> ∪ ... ∪ SS<sub>n</sub>) can be done in R using the `anti_join` function of the `dplyr` package. Example:
      ```r
      SSi_plus_1 <- anti_join(FSi, bind_rows(SS0, SS1, ..., SSi), by = c("doi", "title"))
      ```
    
 
-#### 5. **Repeat the Cycle:**
-   - Repeat the cycle for SS<sub>i+1</sub>, starting from step 2. That is, the SS<sub>i+1</sub> dataset should be expanded using Research Rabbit (obtaining ES<sub>i+1</sub>), filtered (obtaining FS<sub>i+1</sub>), and then non-unique studies should be removed using SS<sub>i+1</sub> as the background dataset. This will result in a new dataset SS<sub>i+2</sub>. SS<sub>i+2</sub> will re-enter the cycle at step 2 and so on, until reaching SS<sub>n</sub>.
-
 **This process is iterative, allowing for continuous refinement and expansion of the dataset, facilitating comprehensive meta-analysis and reviews. The workflow of this search method is summarized in the diagram:**
 
 <div style="text-align: center;">
-  <img src="./images/cycle_search.png" alt="Diagrama de flujo" width="600"/>
+  <img src="./images/cycle_complete.png" alt="Diagrama de flujo" width="600"/>
 </div>
+_This diagram represents the workflow of the 5 steps of the cycle for expanding and filtering studies using Research Rabbit and 'all_bib_to_df' R function. SS<sub>0</sub> is the seed studies dataset obtained from search engines and a keyword sequence (traditional approach); FD is the final dataset of studies that will result in the table used to continue with the meta-analysis; ES is the expanded dataset created from a seed studies data set (SS<sub>0</sub> or NSS). FS is the dataset resulting from filtering ES with the 'all_bin_to_df' function and the keyword sequence; NSS is the new dataset of studies resulted of extracting unique studies of FS, NSS will added to the FD and also reinitiate the expanding - filtering cycle (blue)_
 
 ## When to stop?
 
