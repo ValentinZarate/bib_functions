@@ -24,4 +24,4 @@
 
 **This process is iterative, allowing for continuous refinement and expansion of the dataset, facilitating comprehensive meta-analysis and reviews. The workflow of this search method is summarized in the diagram:**
 
-<img src="./images/cycle.png" alt="Diagrama de flujo" width="400"/>
+<img src="./images/cycle.png" alt="Diagrama de flujo" width="600"/>
