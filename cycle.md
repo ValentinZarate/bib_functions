@@ -18,11 +18,11 @@
    - The function will remove all studies that aren't useful, including duplicates inside the large (ES<sub>i</sub>) dataset. This will result in a Filtered Studies (FS<sub>i</sub>) dataset.
 
 #### 4. **Remove Duplicates and Create New Seed Studies (SS<sub>i+1</sub>):**
-   - Overlap the FS<sub>i</sub> dataset with a combined dataset of all previous Seed Studies (SS<sub>0</sub> + SS<sub>1</sub> + ... + SS<sub>i</sub>). This combined dataset will be referred to as SS<sub>0:i</sub>.
-   - The goal is to create a New Seed Studies dataset (SS<sub>i+1</sub>) that only contains studies present in FS<sub>i</sub> but not in SS<sub>0:i</sub>.
+   - Overlap the FS<sub>i</sub> dataset with a combined dataset of all previous Seed Studies (SS<sub>1</sub> + SS<sub>2</sub> + ... + SS<sub>i</sub>). This combined dataset will be referred to as SS<sub>1:i</sub>.
+   - The goal is to create a New Seed Studies dataset (SS<sub>i+1</sub>) that only contains studies present in FS<sub>i</sub> but not in SS<sub>1:i</sub>.
    - This can be done easily in R using the `anti_join` function of the `dplyr` package. Example:
      ```r
-     SSi_plus_1 <- anti_join(FSi, bind_rows(SS0, SS1, ..., SSi), by = c("doi", "title"))
+     SSi_plus_1 <- anti_join(FSi, bind_rows(SS1, SS2, SS3, ..., SSi), by = c("doi", "title"))
      ```
 
 #### 5. **Repeat the Cycle:**
