@@ -1,4 +1,7 @@
-**The cycle uses Research Rabbit and custom R filtering functions. The diagram should be simple and clear. Here are the steps involved:**
+# Cycle for searching studies using [Research Rabbit](https://researchrabbitapp.com/home) and [`all_bib_to_df`](./'all_bib_to_df'%20function)
+
+## The cycle uses Research Rabbit and custom R filtering functions. The diagram should be simple and clear. 
+### Here are the steps involved:
 
 1. **Create Seed Studies (SS<sub>0</sub>):**
    - Use traditional search engines like Scopus and Google Scholar.
@@ -21,4 +24,4 @@
 
 **This process is iterative, allowing for continuous refinement and expansion of the dataset, facilitating comprehensive meta-analysis and reviews. The workflow of this search method is summarized in the diagram:**
 
-![Diagrama de flujo](./images/cycle.png)
+<img src="./images/cycle.png" alt="Diagrama de flujo" width="400"/>
