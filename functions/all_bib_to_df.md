@@ -62,3 +62,31 @@ all_bib_to_df <- function(keywords_list) {
   return(combined_df)
 }
 ```
+### This function reads all BibTeX files in the working directory, filters them based on the specified keyword criteria, and returns a combined and filtered data frame. Adjust the keywords_list according to your specific keyword sequences.
+
+### example of keywords
+```r 
+keywords1 <- c(
+"human", "humans", "fragmentation", "fragmented", "agricultural",
+"agriculture", "crop", "crops", "plantation", "plantations",
+"human-dominated", "human-modified","forestry", "production",
+"commercial","harvested", "fragment", "fragments", "management",
+ "land use", "athropogenic","logging", "managed", "anthropogenically",
+ "mosaic", "rural", "agriculture", "agroecosystem", "timber", "agro-forestry")
+
+keywords2 <- c(
+"mammal", "mammals", "mammalian")
+
+keywords3 <- c(
+"home range", "home ranges", "home-ranges", "home-range",
+"ranging behavior", "kernel", "fixed-kernel", "kernel-density")
+```
+### From those vector we create a list.
+
+```r
+keywords_list <- list(keywords1, keywords2, keywords3)
+```
+### the list will be applyied to all bib files in the working directory
+```r
+result <- all_bib2df(keywords_list)
+```
