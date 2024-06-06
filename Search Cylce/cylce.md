@@ -39,7 +39,7 @@ Note: The 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycl
 **This process is iterative, allowing for continuous refinement and expansion of the dataset, facilitating comprehensive meta-analyses and reviews. The workflow of this search method is summarized in the diagram:**
 
 <div style="text-align: center;">
-  <img src="./images/cycle_complete.png" alt="Diagrama de flujo" width="600"/>
+  <img src="bib_functions/images/cycle_complete.png" alt="Diagrama de flujo" width="600"/>
 </div>
 *This diagram represents the workflow of the 5 steps of the cycle for expanding and filtering studies using Research Rabbit and the 'all_bib_to_df' R function. SS<sub>0</sub> is the seed studies dataset obtained from search engines and a keyword sequence (traditional approach); FD is the final dataset of studies that will result in the table used to continue with the meta-analysis; ES is the expanded dataset created from a seed studies dataset (SS<sub>0</sub> or NSS). FS is the dataset resulting from filtering ES with the 'all_bib_to_df' function and the keyword sequence; NSS is the new dataset of studies resulting from extracting unique studies from FS. NSS will be added to the FD and will also reinitiate the expanding-filtering cycle (blue) *
  
