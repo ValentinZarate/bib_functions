@@ -31,10 +31,10 @@
    - The FS<sub>1</sub> dataset will be overlapped with the union of SS<sub>0</sub> and NSS<sub>1</sub> to find all unique studies and create the new seed studies dataset NSS<sub>2</sub>. NSS<sub>2</sub> will be added to the final dataset FD (together with SS<sub>0</sub> and NSS<sub>1</sub> studies) and reinitiate the cycle starting from step 2.
    - This cycle will be repeated 'n' times until NSS<sub>n</sub> is empty.
 
-**Note:** The 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycles) with the union of previous seed study datasets (NSS<sub>1:i</sub> = (SS<sub>0</sub> ∪ NSS<sub>1</sub> ∪ NSS<sub>2</sub> ∪ ... ∪ NSS<sub>n</sub>)) can be done in R using the `anti_join` function of the `dplyr` package. Example:
+**Note:** The 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycles) with the union of previous seed study datasets (NSS<sub>1:i</sub> = (SS<sub>0</sub> ∪ NSS<sub>1</sub> ∪ NSS<sub>2</sub> ∪ ... ∪ NSS<sub>n</sub>)) can be done in R using the `anti_join` function of the `dplyr` package, using the 'doi' and 'title' to detect duplicates. Example:
 
    ```r
-   SSi_plus_1 <- anti_join(FSi, bind_rows(SS0, NSS1, ..., SSi), by = c("doi", "title"))
+   SSi_plus_1 <- anti_join(FSi, bind_rows(SS0, NSS1, ..., NSSn), by = c("doi", "title"))
    ```
 
 **This process is iterative, allowing for continuous refinement and expansion of the dataset, facilitating comprehensive meta-analyses and reviews. The workflow of this search method is summarized in the diagram:**
