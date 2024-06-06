@@ -1,4 +1,6 @@
-# primera función, se le debe ingresar un archivo formato 'bib' en el primer argumento que tenga al menos una columna con 'abstract' y otra 'title'. el segundo argumento tiene que ser un vector de palabras clave que se utilizarán para filtrar el dataframe. Estas palabras clave se buscarán en las columnas title y abstract.
+## Primera función 'bib_to_filtered'
+_se le debe ingresar un archivo formato 'bib' en el primer argumento que tenga al menos una columna con 'abstract' y otra 'title'. el segundo argumento tiene que ser un vector de palabras clave que se utilizarán para filtrar el dataframe. Estas palabras clave se buscarán en las columnas title y abstract._
+
 ```r
 bib_to_filtered <- function(bib_data, keywords) {
   
@@ -31,7 +33,9 @@ bib_to_filtered <- function(bib_data, keywords) {
 }
 ```
 
-# esta función utiliza la primera 'bib_to_filtered'. En este caso puede hacer una df utilizando todos los archivos 'bib' que esten en la misma carpeta que el script, es decir que tengan el mismo directorio. Además, eliminar las filas repetidas basandose en el doi.
+## Segunda función 'process_bib_files'.
+_Esta función utiliza la primera 'bib_to_filtered'. En este caso puede hacer una df utilizando todos los archivos 'bib' que esten en la misma carpeta que el script, es decir que tengan el mismo directorio. Además, eliminar las filas repetidas basandose en el doi._
+
 ```r
 process_bib_files <- function(keywords) {
   
@@ -48,7 +52,8 @@ process_bib_files <- function(keywords) {
 }
 ```
 
-# incorporando una data frame y una secuencia de keywords (vector de palabras). La idea es incoprporar la df resultante de las funciones anteriores. Es decir df <- process_bib_files(keywords) o df <- bib_to_filtered(bib_data, keywords)
+## Tercera Función 'other_seq'.
+_incorporando una data frame y una secuencia de keywords (vector de palabras). La idea es incoprporar la df resultante de las funciones anteriores. Es decir df <- process_bib_files(keywords) o df <- bib_to_filtered(bib_data, keywords)_
 ```r
 other_seq <- function(data, keywords) {
   
