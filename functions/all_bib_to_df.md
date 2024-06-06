@@ -1,4 +1,4 @@
-##### The function `all_bib_to_df` processes BibTeX files to filter entries based on a list of keywords. The function operates in two main steps:
+### The function `all_bib_to_df` processes BibTeX files to filter entries based on a list of keywords. The function operates in two main steps:
 
 1. **Keyword List Format**: The keyword list should be a list of word vectors. Each vector represents a sequence of words connected by an OR boolean operator (represented by commas within the vector). The combination of these vectors in the list is connected by an AND boolean operator. This means the function will filter all BibTeX files within the same directory as the script, including an entry if at least one word from each vector is present in either the 'abstract' or 'title'. Entries not meeting this criterion are excluded.
 
