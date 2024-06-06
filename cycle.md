@@ -1,6 +1,6 @@
 # Cycle for searching studies using [Research Rabbit](https://researchrabbitapp.com/home) and [`all_bib_to_df`](./'all_bib_to_df'%20function)
 
-## The cycle uses Research Rabbit and custom R filtering functions. The diagram should be simple and clear.
+## The cycle uses Research Rabbit and custom R filtering functions. 
 
 ### Here are the steps involved:
 
@@ -34,7 +34,7 @@ Note: The 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycl
    SSi_plus_1 <- anti_join(FSi, bind_rows(SS0, NSS1, ..., SSi), by = c("doi", "title"))
    ```
 
-**This process is iterative, allowing for continuous refinement and expansion of the dataset, facilitating comprehensive meta-analysis and reviews. The workflow of this search method is summarized in the diagram:**
+**This process is iterative, allowing for continuous refinement and expansion of the dataset, facilitating comprehensive meta-analyses and reviews. The workflow of this search method is summarized in the diagram:**
 
 <div style="text-align: center;">
   <img src="./images/cycle_complete.png" alt="Diagrama de flujo" width="600"/>
