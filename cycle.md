@@ -1,6 +1,6 @@
 # Cycle for searching studies using [Research Rabbit](https://researchrabbitapp.com/home) and [`all_bib_to_df`](./'all_bib_to_df'%20function)
 
-## This cyclic workflow is for expanding and filtering a dataset of studies. The expansion phase uses AI tools like Research Rabbit or [Litmaps](https://www.litmaps.com/), and the filtering phase employs custom R filtering functions. The goal of this workflow is to exhaust all studies using a keyword sequence. Additionally, it allows for the exhaustive examination of references using only _free_ search engines and AI tools.
+## <h2 style="font-weight: normal;"> *This cyclic workflow is for expanding and filtering a dataset of studies.* The expansion phase uses AI tools like Research Rabbit or [Litmaps](https://www.litmaps.com/), and the filtering phase employs custom R filtering functions. The goal of this workflow is to exhaust all studies using a keyword sequence. Additionally, it allows for the exhaustive examination of references using only _free_ search engines and AI tools.
 
 ### Here are the steps involved:
 
@@ -39,7 +39,7 @@ Note: The 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycl
 <div style="text-align: center;">
   <img src="./images/cycle_complete.png" alt="Diagrama de flujo" width="600"/>
 </div>
-_This diagram represents the workflow of the 5 steps of the cycle for expanding and filtering studies using Research Rabbit and the 'all_bib_to_df' R function. SS<sub>0</sub> is the seed studies dataset obtained from search engines and a keyword sequence (traditional approach); FD is the final dataset of studies that will result in the table used to continue with the meta-analysis; ES is the expanded dataset created from a seed studies dataset (SS<sub>0</sub> or NSS). FS is the dataset resulting from filtering ES with the 'all_bib_to_df' function and the keyword sequence; NSS is the new dataset of studies resulting from extracting unique studies from FS. NSS will be added to the FD and will also reinitiate the expanding-filtering cycle (blue)_
+*This diagram represents the workflow of the 5 steps of the cycle for expanding and filtering studies using Research Rabbit and the 'all_bib_to_df' R function. SS<sub>0</sub> is the seed studies dataset obtained from search engines and a keyword sequence (traditional approach); FD is the final dataset of studies that will result in the table used to continue with the meta-analysis; ES is the expanded dataset created from a seed studies dataset (SS<sub>0</sub> or NSS). FS is the dataset resulting from filtering ES with the 'all_bib_to_df' function and the keyword sequence; NSS is the new dataset of studies resulting from extracting unique studies from FS. NSS will be added to the FD and will also reinitiate the expanding-filtering cycle (blue) *
  
 ## When to stop?
 
