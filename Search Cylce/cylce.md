@@ -7,31 +7,32 @@
 ### Here are the steps involved:
 
 #### 1. **Initial Seed Studies dataset:**
-   - Use traditional search methods, using a keyword sequence (with boolean operators and truncation, for example) and search engines like Scopus, Web of Science, and Google Scholar.
-   - This initial dataset will be called Seed Studies (SS<sub>0</sub>). These studies should be organized in reference manager software like Zotero, Mendeley, or EndNote to provide the correct format (BibTeX) for the next steps.
-   - This initial set of seed studies will be loaded into the final dataset (FD), which will be used for the systematic analysis.
+   - Create the seed studies dataset using traditional search methods. Employ a keyword sequence (with boolean operators and truncation, for example) and search engines like Scopus, Web of Science, and Google Scholar. This will give you a first and quickly filtered (by title, abstract and keywords for example) dataset of studies, it is not a problem if studies are missing. 
+   - This initial dataset will be called Seed Studies '0' (SS<sub>0</sub>). These studies should be organized in a reference manager software like Zotero, Mendeley, or EndNote to provide the correct format (BibTeX) for the next steps.
+   - (SS<sub>0</sub>) dataset will be included in the final dataset (FD), which will be used for the systematic analysis.
 
 #### 2. **Expand Seed Studies:**
    - Import the SS<sub>0</sub> studies as BibTeX to [Research Rabbit](https://researchrabbitapp.com/home).
-   - For each SS<sub>0</sub>, Research Rabbit will retrieve all its references (studies cited by the seed study; previous studies) and citations (studies that cite each seed study; posterior studies). This dataset should be exported as BibTeX. For each seed study inside SS<sub>0</sub>, we will have 2 BibTeX files: one for 'references' and one for 'citations'. All BibTeX files should be saved in the same directory (see why in step 3).
+   - Research Rabbit will retrieve all its references (studies cited by the seed study; previous studies) and citations (studies that cite each seed study; posterior studies) for each study included in SS<sub>0</sub> dataset. For each seed study inside SS<sub>0</sub>, we will have 2 BibTeX files: one for 'references' and one for 'citations'. All BibTeX files should be saved in the same directory (see why in step 3).
    - This expansion produces a new, larger set of studies called Expanded Studies (ES).
 
 #### 3. **Filter Expanded Studies:**
-   - We will use the same keyword sequence from 'step 1' (to create SS<sub>0</sub>) to filter the ES dataset using the [`all_bib_to_df`](./'all_bib_to_df'%20function). This function requires that all BibTeX files are in the same working directory where the R script will be run.
-   - The R function will remove all studies from ES that do not satisfy the keyword sequence, using their 'keywords', 'title', and 'abstract'. ES probably includes a lot of duplicate studies, so [`all_bib_to_df`](./'all_bib_to_df'%20function) also removes those redundant studies. The result of this filtering will be a dataset called Filtered Studies (FS).
+   - We will use the same keyword sequence from 'step 1' (the one used to obtain SS<sub>0</sub>) to filter the ES dataset using the [`all_bib_to_df`](./'all_bib_to_df'%20function). This function requires that all BibTeX files are in the same working directory where the R script will be run.
+   - The R function will remove all studies from ES that do not satisfy the keyword sequence, using their 'keywords', 'title', and 'abstract'. ES probably includes a lot of duplicate studies, so [`all_bib_to_df`](./'all_bib_to_df'%20function) also removes those redundant studies. The result of this filtering will be a smaller and filtered dataset called Filtered Studies (FS).
 
 #### 4. **Keep Unique Studies:**
-   - The FS dataset will be overlapped with SS<sub>0</sub> to keep only the new studies provided by the expansion and filtering steps (steps 2 and 3). This new dataset of studies is composed of all studies present in FS but not in the initial dataset SS<sub>0</sub>.
+   - It is likely that FS contain a lot of studies already present in SS<sub>0</sub>, and thus in FD. therefore, the FS dataset will be overlapped with SS<sub>0</sub> to keep only the new studies provided by the expansion and filtering steps (steps 2 and 3). This new dataset of studies will be composed by all studies present in FS but not in the initial dataset SS<sub>0</sub>.
    - This new dataset will be called New Seed Studies (NSS), and will be added to the final dataset FD, together with all studies included in SS<sub>0</sub>.
 
 #### 5. **Repeat the Cycle:**
-   - The NSS will reinitiate the cycle, just like SS<sub>0</sub>. NSS<sub>1</sub>, sub-index '1', indicates the dataset created by one expanding-filtering cycle.
+   - The NSS will reinitiate the cycle, just like SS<sub>0</sub>. NSS<sub>1</sub>, sub-index '1', indicates that this dataset was created by one expanding-filtering cycle.
    - NSS<sub>1</sub> will be expanded with Research Rabbit, creating an ES<sub>1</sub> dataset (step 2).
    - ES<sub>1</sub> will be filtered with the [`all_bib_to_df`](./'all_bib_to_df'%20function) function, creating an FS<sub>1</sub> dataset (step 3).
-   - The FS<sub>1</sub> dataset will be overlapped with the union of SS<sub>0</sub> and NSS<sub>1</sub> to find all unique studies and create the new seed studies dataset NSS<sub>2</sub>. NSS<sub>2</sub> will be added to the final dataset FD (together with SS<sub>2</sub> and NSS<sub>1</sub> studies) and reinitiate the cycle starting from step 2.
+   - The FS<sub>1</sub> dataset will be overlapped with the union of SS<sub>0</sub> and NSS<sub>1</sub> to find all unique studies and create the new seed studies dataset NSS<sub>2</sub>. NSS<sub>2</sub> will be added to the final dataset FD (together with SS<sub>0</sub> and NSS<sub>1</sub> studies) and reinitiate the cycle starting from step 2.
    - This cycle will be repeated 'n' times until NSS<sub>n</sub> is empty.
 
-Note: The 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycles) with the union of previous seed study datasets (NSS<sub>1:i</sub> = (SS<sub>0</sub> ∪ NSS<sub>1</sub> ∪ NSS<sub>2</sub> ∪ ... ∪ NSS<sub>n</sub>)) can be done in R using the `anti_join` function of the `dplyr` package. Example:
+**Note:** The 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycles) with the union of previous seed study datasets (NSS<sub>1:i</sub> = (SS<sub>0</sub> ∪ NSS<sub>1</sub> ∪ NSS<sub>2</sub> ∪ ... ∪ NSS<sub>n</sub>)) can be done in R using the `anti_join` function of the `dplyr` package. Example:
+
    ```r
    SSi_plus_1 <- anti_join(FSi, bind_rows(SS0, NSS1, ..., SSi), by = c("doi", "title"))
    ```
