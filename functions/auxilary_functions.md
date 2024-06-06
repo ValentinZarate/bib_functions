@@ -52,7 +52,7 @@ process_bib_files <- function(keywords) {
 }
 ```
 
-## 3<sup>ra</sup> función 'other_seq'.
+## 3<sup>era</sup> función 'other_seq'.
 _incorporando una data frame y una secuencia de keywords (vector de palabras). La idea es incoprporar la df resultante de las funciones anteriores. Es decir df <- process_bib_files(keywords) o df <- bib_to_filtered(bib_data, keywords)_
 ```r
 other_seq <- function(data, keywords) {
