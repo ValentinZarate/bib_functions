@@ -88,5 +88,5 @@ keywords_list <- list(keywords1, keywords2, keywords3)
 ```
 ### the list will be applyied to all bib files in the working directory
 ```r
-result <- all_bib2df(keywords_list)
+result <- all_bib_to_df (keywords_list)
 ```
