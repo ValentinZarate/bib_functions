@@ -17,7 +17,7 @@
    - This expansion produces a new, larger set of studies called Expanded Studies (ES).
 
 #### 3. **Filter Expanded Studies:**
-   - We will use the same keyword sequence from 'step 1' (the one used to obtain SS<sub>0</sub>) to filter the ES dataset using the [`all_bib_to_df`](./'all_bib_to_df'%20function). This function requires that all BibTeX files are in the same working directory where the R script will be run.
+   - We will use the same keyword sequence from 'step 1' (the one used to obtain SS<sub>0</sub>) to filter the ES dataset using the [`all_bib_to_df`](.functions/'all_bib_to_df'%20function). This function requires that all BibTeX files are in the same working directory where the R script will be run.
    - The R function will remove all studies from ES that do not satisfy the keyword sequence, using their 'keywords', 'title', and 'abstract'. ES probably includes a lot of duplicate studies, so [`all_bib_to_df`](./'all_bib_to_df'%20function) also removes those redundant studies. The result of this filtering will be a smaller and filtered dataset called Filtered Studies (FS).
 
 #### 4. **Keep Unique Studies:**
