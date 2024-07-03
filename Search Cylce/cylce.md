@@ -49,3 +49,12 @@ _This diagram represents the workflow of the 5 steps of the cycle for expanding 
 
 The main objective of this cycle is to exhaust all references linked to the initial 'keyword sequence'. The novelty is the inclusion of powerful and free tools such as Research Rabbit (which could be applied to [Litmaps](https://www.litmaps.com/) as well). The final number of cycles 'n' needed to exhaust all references is unknown and will depend on the keyword sequences and topic of research. However, we can assume that 'i' has reached 'n' when SS<sub>i+1</sub> (SSi_plus_1 <- anti_join(FSi, SSi, by = c("doi", "title")) is empty.
 
++-------------------+       +-------------------+
+|      HMM          |       |      RNN          |
++-------------------+       +-------------------+
+|  Estados Ocultos  |  -->  | Dependencias      |
+| (Secuencia de     |       | Temporales        |
+|  Fonemas)         |       | Complejas         |
++-------------------+       +-------------------+
+
+
