@@ -1,4 +1,4 @@
-# Cycle for searching studies using [Research Rabbit](https://researchrabbitapp.com/home) and [`all_bib_to_df`](./'all_bib_to_df'%20function)
+# Cycle for searching studies using [Research Rabbit](https://researchrabbitapp.com/home) and [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md)
 
 <div style="font-size: 13px; font-weight: normal;">
   <i>This cyclic workflow is for expanding and filtering a dataset of studies. The expansion phase uses AI tools like Research Rabbit or <a href="https://www.litmaps.com/">Litmaps</a>, and the filtering phase employs custom R filtering functions. The goal of this workflow is to exhaust all studies using a keyword sequence. Additionally, it allows for the exhaustive examination of references using only <i>free</i> search engines and AI tools.</i>
@@ -18,7 +18,7 @@
 
 #### 3. **Filter Expanded Studies:**
    - We will use the same keyword sequence from 'step 1' (the one used to obtain SS<sub>0</sub>) to filter the ES dataset using the [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md). This function requires that all BibTeX files are in the same working directory where the R script will be run.
-   - The R function will remove all studies from ES that do not satisfy the keyword sequence, using their 'keywords', 'title', and 'abstract'. ES probably includes a lot of duplicate studies, so [`all_bib_to_df`](./'all_bib_to_df'%20function) also removes those redundant studies. The result of this filtering will be a smaller and filtered dataset called Filtered Studies (FS).
+   - The R function will remove all studies from ES that do not satisfy the keyword sequence, using their 'keywords', 'title', and 'abstract'. ES probably includes a lot of duplicate studies, so [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md) also removes those redundant studies. The result of this filtering will be a smaller and filtered dataset called Filtered Studies (FS).
 
 #### 4. **Keep Unique Studies:**
    - It is likely that FS contain a lot of studies already present in SS<sub>0</sub>, and thus in FD. therefore, the FS dataset will be overlapped with SS<sub>0</sub> to keep only the new studies provided by the expansion and filtering steps (steps 2 and 3). This new dataset of studies will be composed by all studies present in FS but not in the initial dataset SS<sub>0</sub>.
@@ -27,7 +27,7 @@
 #### 5. **Repeat the Cycle:**
    - The NSS will reinitiate the cycle, just like SS<sub>0</sub>. NSS<sub>1</sub>, sub-index '1', indicates that this dataset was created by one expanding-filtering cycle.
    - NSS<sub>1</sub> will be expanded with Research Rabbit, creating an ES<sub>1</sub> dataset (step 2).
-   - ES<sub>1</sub> will be filtered with the [`all_bib_to_df`](./'all_bib_to_df'%20function) function, creating an FS<sub>1</sub> dataset (step 3).
+   - ES<sub>1</sub> will be filtered with the [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md) function, creating an FS<sub>1</sub> dataset (step 3).
    - The FS<sub>1</sub> dataset will be overlapped with the union of SS<sub>0</sub> and NSS<sub>1</sub> to find all unique studies and create the new seed studies dataset NSS<sub>2</sub>. NSS<sub>2</sub> will be added to the final dataset FD (together with SS<sub>0</sub> and NSS<sub>1</sub> studies) and reinitiate the cycle starting from step 2.
    - This cycle will be repeated 'n' times until NSS<sub>n</sub> is empty.
 
