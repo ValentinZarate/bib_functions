@@ -21,7 +21,7 @@
    - The R function will remove all studies from ES that do not satisfy the keyword sequence, using their 'keywords', 'title', and 'abstract'. ES probably includes a lot of duplicate studies, so [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md) also removes those redundant studies. The result of this filtering will be a smaller and filtered dataset called Filtered Studies (FS).
 
 #### 4. **Keep Unique Studies:**
-   - It is likely that FS contain a lot of studies already present in SS<sub>0</sub>, and thus in FD. therefore, the FS dataset will be overlapped with SS<sub>0</sub> to keep only the new studies provided by the expansion and filtering steps (steps 2 and 3). This new dataset of studies will be composed by all studies present in FS but not in the initial dataset SS<sub>0</sub>.
+   - It is likely that FS contain a lot of studies already present in SS<sub>0</sub>, and thus in FD. Therefore, the FS dataset will be overlapped with SS<sub>0</sub> to keep only the new studies provided by the expansion and filtering steps (steps 2 and 3). This new dataset of studies will be composed by all studies present in FS but not in the initial dataset SS<sub>0</sub>.
    - This new dataset will be called New Seed Studies (NSS), and will be added to the final dataset FD, together with all studies included in SS<sub>0</sub>.
 
 #### 5. **Repeat the Cycle:**
