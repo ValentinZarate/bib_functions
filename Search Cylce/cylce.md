@@ -4,7 +4,7 @@
   <i>This cyclic workflow is for expanding and filtering a dataset of studies. The expansion phase uses AI tools like Research Rabbit or <a href="https://www.litmaps.com/">Litmaps</a>, and the filtering phase employs custom R filtering functions. The goal of this workflow is to exhaust all studies using a keyword sequence. Additionally, it allows for the exhaustive examination of references using only <i>free</i> search engines and AI tools.</i>
 </div>
 
-### Here are the steps involved:
+### Steps involved:
 
 #### 1. **Initial Seed Studies dataset:**
    - Create the seed studies dataset using traditional search methods. Employ a keyword sequence (with boolean operators and truncation, for example) and search engines like Scopus, Web of Science, and Google Scholar. This will give you a first and quickly filtered (by title, abstract and keywords for example) dataset of studies, it is not a problem if studies are missing. 
