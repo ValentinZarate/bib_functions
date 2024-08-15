@@ -40,13 +40,13 @@ all_bib_to_df <- function(keywords_list) {
   directory <- getwd()
   bib_files <- list.files(path = directory, pattern = "*.bib", full.names = TRUE)
   
-  # I use the lapply function to apply the bib_to_filtered function to each .bib file in bib_files, using the first set of keywords from keywords_list.
+  # The lapply function apply the bib_to_filtered function to each file that end with '.bib' in bib_files, using the first set of keywords from keywords_list.
   
   filtered_dfs <- lapply(bib_files, bib_to_filtered, keywords_list[[1]])
   combined_df <- bind_rows(filtered_dfs) %>%
     distinct(doi, .keep_all = TRUE)
   
-  # This loop (i in 2:length(keywords_list)) will iterate over all the vectors within keywords_list, starting from the second vector to the end of the list. In this case, it only does it twice, but if I had many ANDs in my search sequence, it would do it that many times.
+  # This loop (i in 2:length(keywords_list)) will iterate over all the vectors within keywords_list, starting from the second vector to the end of the list. In this case, it only does it twice, but if I had 50 ANDs in my search sequence, it would do it 50 times.
   
   for (i in 2:length(keywords_list)) {
     keyword_pattern <- paste(keywords_list[[i]], collapse = "|")
