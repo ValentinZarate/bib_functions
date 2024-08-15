@@ -26,9 +26,9 @@
 
 #### 5. **Repeat the Cycle:**
    - The NSS will reinitiate the cycle, just like SS<sub>0</sub>. NSS<sub>1</sub>, sub-index '1', indicates that this dataset was created by one expanding-filtering cycle.
-   - NSS<sub>1</sub> will be expanded with Research Rabbit, creating an ES<sub>1</sub> dataset (step 2).
-   - ES<sub>1</sub> will be filtered with the [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md) function, creating an FS<sub>1</sub> dataset (step 3).
-   - The FS<sub>1</sub> dataset will be overlapped with the union of SS<sub>0</sub> and NSS<sub>1</sub> to find all unique studies and create the new seed studies dataset NSS<sub>2</sub>. NSS<sub>2</sub> will be added to the final dataset FD (together with SS<sub>0</sub> and NSS<sub>1</sub> studies) and reinitiate the cycle starting from step 2.
+   - NSS<sub>1</sub> will be expanded with Research Rabbit, creating an ES<sub>1</sub> dataset **(step 2)**.
+   - ES<sub>1</sub> will be filtered with the [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md) function, creating an FS<sub>1</sub> dataset **(step 3)**.
+   - The FS<sub>1</sub> dataset will be overlapped with the union of SS<sub>0</sub> and NSS<sub>1</sub> to find all unique studies and create the new seed studies dataset NSS<sub>2</sub>. NSS<sub>2</sub> will be added to the final dataset FD (together with SS<sub>0</sub> and NSS<sub>1</sub> studies) **(Step 4)** and reinitiate the cycle starting from step 2.
    - This cycle will be repeated 'n' times until NSS<sub>n</sub> is empty.
 
 **Note:** The 4th step, which needs to unify FS<sub>i</sub> (i goes from 1 to n cycles) with the union of previous seed study datasets (NSS<sub>1:i</sub> = (SS<sub>0</sub> ∪ NSS<sub>1</sub> ∪ NSS<sub>2</sub> ∪ ... ∪ NSS<sub>n</sub>)) can be done in R using the `anti_join` function of the `dplyr` package, using the 'doi' and 'title' to detect duplicates. Example:
