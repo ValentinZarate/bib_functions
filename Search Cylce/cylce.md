@@ -7,7 +7,7 @@
 ### Steps involved:
 
 #### 1. **Initial Seed Studies dataset:**
-   - Create the seed studies dataset using traditional search methods. Employ a keyword sequence (with boolean operators and truncation, for example) and search engines like Google Scholar (we can avoid paid or exclusive search engines like Scopus or Web of Science). This will give you a first and quickly filtered (by title, abstract and keywords for example) dataset of studies, it is not a problem if studies are missing. 
+   - Create the seed studies dataset using traditional search methods. Employ a keyword sequence (with boolean operators and truncation, for example) and search engines like Google Scholar (we can avoid paid or exclusive search engines like Scopus or Web of Science). This will give you a first and quickly filtered (by title, abstract and keywords for example) dataset of studies, it is not a problem if studies are missing in this step. 
    - This initial dataset will be called Seed Studies '0' (SS<sub>0</sub>). These studies should be organized in a reference manager software like Zotero, Mendeley, or EndNote to provide the correct format (BibTeX) for the next steps.
    - SS<sub>0</sub> dataset will be included in the final dataset (FD), which will be used for the systematic analysis.
 
