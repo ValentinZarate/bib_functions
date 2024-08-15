@@ -3,7 +3,7 @@
 
 1. **Keyword List Format**: The keyword list should be a list of word vectors. Each vector represents a sequence of words connected by an OR boolean operator (represented by commas within the vector). The combination of these vectors in the list is connected by an AND boolean operator. This means the function will filter all BibTeX files within the same directory as the script, including an entry if at least one word from each vector is present in either the 'abstract' or 'title'. Entries not meeting this criterion are excluded.
 
-2. **Function Implementation**: The function utilizes packages such as `dplyr`, `stringr`, and `RefManageR`. It also uses an auxiliary function `bib_to_filtered` to handle the filtering process. The function reads all BibTeX files in the directory, applies the keyword filtering, and combines the results into a single filtered data frame. The filtering is performed iteratively to ensure each keyword vector's criteria are met.
+2. **Function Implementation**: The function utilizes funtcions of the packages `dplyr`, `stringr`, and `RefManageR`. It also uses an customize auxiliary function `bib_to_filtered` to handle the filtering process. The function reads all BibTeX files in the directory, applies the keyword filtering, and combines the results into a single filtered data frame. The filtering is performed iteratively to ensure each keyword vector's criteria are met.
 
 ```r
 all_bib_to_df <- function(keywords_list) {
