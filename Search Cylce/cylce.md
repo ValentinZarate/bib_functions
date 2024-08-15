@@ -1,4 +1,4 @@
-# Cycle for searching studies using [Research Rabbit](https://researchrabbitapp.com/home) and [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md)
+## Cycle for searching studies using [Research Rabbit](https://researchrabbitapp.com/home) and [`all_bib_to_df`](https://github.com/ValentinZarate/bib_functions/blob/main/functions/all_bib_to_df.md)
 
 <div style="font-size: 13px; font-weight: normal;">
   <i>This cyclic workflow is for expanding and filtering a dataset of studies. The expansion phase uses AI tools like Research Rabbit or <a href="https://www.litmaps.com/">Litmaps</a>, and the filtering phase employs custom R filtering functions. The goal of this workflow is to exhaust all studies using a keyword sequence. Additionally, it allows for the exhaustive examination of references using only <i>free</i> search engines and AI tools.</i>
