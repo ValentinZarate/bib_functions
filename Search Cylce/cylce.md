@@ -13,7 +13,7 @@
 
 #### 2. **Expand Seed Studies:**
    - Import the SS<sub>0</sub> studies as BibTeX to [Research Rabbit](https://researchrabbitapp.com/home). This AI platform allow to import a maximum of 100 seed studies at once.
-   - Research Rabbit will retrieve all its references (studies cited by the seed study; previous studies) and citations (studies that cite each seed study; posterior studies) for each study included in SS<sub>0</sub> dataset. We can also expand by semanthic criteria. For each seed study inside SS<sub>0</sub>, we will have 2 BibTeX files: one for 'references' and one for 'citations' (if we use semanthic criteria we will creat three BibTeX). All BibTeX files should be saved in the same directory (see why in step 3).
+   - Research Rabbit will retrieve all its references (studies cited by the seed study; previous studies) and citations (studies that cite each seed study; posterior studies) for each study included in SS<sub>0</sub> dataset. We can also expand based on semantic criteria. Note that this step may retrieve thousands of studies per seed study and could introduce replicability issues. This search function uses many criteria and therefore behaves somewhat like a "black box". For each seed study inside SS<sub>0</sub>, we will have 2 BibTeX files: one for 'references' and one for 'citations' (if we use semanthic criteria we will creat three BibTeX). All BibTeX files should be saved in the same directory (see why in step 3).
    - This expansion produces a new, larger set of studies called Expanded Studies (ES).
 
 #### 3. **Filter Expanded Studies:**
