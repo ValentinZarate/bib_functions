@@ -67,25 +67,19 @@ _This function reads all BibTeX files in the working directory, filters them bas
 
 ### example of keywords
 ```r 
-keywords1 <- c(
-"human", "humans", "fragmentation", "fragmented", "agricultural",
-"agriculture", "crop", "crops", "plantation", "plantations",
-"human-dominated", "human-modified","forestry", "production",
-"commercial","harvested", "fragment", "fragments", "management",
- "land use", "athropogenic","logging", "managed", "anthropogenically",
- "mosaic", "rural", "agriculture", "agroecosystem", "timber", "agro-forestry")
-
+keywords1 <- c("primate", "primates", "monkey", "monkeys", "ape", "apes")
 keywords2 <- c(
-"mammal", "mammals", "mammalian")
-
-keywords3 <- c(
-"home range", "home ranges", "home-ranges", "home-range",
-"ranging behavior", "kernel", "fixed-kernel", "kernel-density")
+  "sleep", "sleeps", "sleeping", 
+  "roost", "roosts", "roosting",
+  "nest", "nests", "nesting",
+  "sleeping site", "sleep site", "sleeping tree", 
+  "night site", "night sites"
+)
 ```
 ### From those vector we create a list.
 
 ```r
-keywords_list <- list(keywords1, keywords2, keywords3)
+keywords_list <- list(keywords1, keywords2)
 ```
 ### the list will be applyied to all bib files in the working directory
 ```r
